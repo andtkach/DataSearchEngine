@@ -5,10 +5,6 @@ import { SpeakerModalProvider } from "../contexts/SpeakerModalContext";
 
 export default function SpeakerMenu() {
   const {
-    speakingSaturday,
-    setSpeakingSaturday,
-    speakingSunday,
-    setSpeakingSunday,
     searchText,
     setSearchText,
   } = useContext(SpeakerMenuContext);
@@ -31,39 +27,13 @@ export default function SpeakerMenu() {
             placeholder="Search"
           />
         </div>
-
-        <div className="form-check-inline">
-          <label className="form-check-label">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              onChange={() => {
-                setSpeakingSaturday(!speakingSaturday);
-              }}
-              checked={speakingSaturday}
-            />
-            Saturday Speakers
-          </label>
-        </div>
-
-        <div className="form-check-inline">
-          <label className="form-check-label">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              onChange={() => {
-                setSpeakingSunday(!speakingSunday);
-              }}
-              checked={speakingSunday}
-            />
-            Sunday Speakers
-          </label>
-        </div>
+        
         <div className="input-group">
           <SpeakerModalProvider>
             <AddSpeakerDialog />
           </SpeakerModalProvider>
         </div>
+        
       </div>
     </div>
   );

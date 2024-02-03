@@ -68,7 +68,7 @@ namespace SearchEngine.API.Controllers
                 result = data.ToList();
             }
 
-            return result;
+            return result ?? [];
         }
 
         [HttpGet("all")]

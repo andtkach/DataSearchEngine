@@ -7,9 +7,9 @@ export default function SpeakersModalHeader() {
     <div className="modal-header bg-main-gradient text-white">
       <h5 className="modal-title">
         {modalSpeakerId === 0 ? (
-          <span>Add Speaker</span>
+          <span>Add Person</span>
         ) : (
-          <span>Edit Speaker</span>
+          <span>Edit Person</span>
         )}
       </h5>
       <button

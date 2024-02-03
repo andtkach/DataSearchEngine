@@ -4,7 +4,6 @@ import SpeakerImageToggleOnScroll from "./SpeakerImageToggleOnScroll";
 
 const SpeakerLine = memo(
   ({ speakerRec, toggleFavoriteSpeaker, updating, highlight }) => {
-    console.log(`SpeakerLine: speaker: ${speakerRec.lastName}`);
     return (
       <div className="col-xl-12 col-md-12">
         <div className="card border-0 speaker-list">

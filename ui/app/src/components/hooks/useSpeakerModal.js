@@ -6,8 +6,9 @@ function useSpeakerModal() {
   const [modalSpeakerId, setModalSpeakerId] = useState(0);
   const [modalSpeakerFirstName, setModalSpeakerFirstName] = useState("");
   const [modalSpeakerLastName, setModalSpeakerLastName] = useState("");
-  const [modalSpeakerImageUrl, setModalSpeakerImageUrl] = useState("");
+  const [modalSpeakerCountry, setModalSpeakerCountry] = useState("");
   const [modalSpeakerEmail, setModalSpeakerEmail] = useState("");
+  const [modalSpeakerBio, setModalSpeakerBio] = useState("");
 
   return {
     modalShow,
@@ -21,8 +22,10 @@ function useSpeakerModal() {
     setModalSpeakerLastName,
     modalSpeakerEmail,
     setModalSpeakerEmail,
-    modalSpeakerImageUrl,
-    setModalSpeakerImageUrl,
+    modalSpeakerCountry,
+    setModalSpeakerCountry,
+    modalSpeakerBio,
+    setModalSpeakerBio,
   };
 }
 

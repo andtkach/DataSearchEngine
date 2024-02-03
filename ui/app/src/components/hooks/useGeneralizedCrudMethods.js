@@ -3,13 +3,13 @@ import axios from "axios";
 
 const LOADING_STATES = ["loading", "errored", "success"];
 
-function useGeneralizedCrudMethods(url, errorNotificationFn) {
+function useGeneralizedCrudMethods(urls, errorNotificationFn) {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loadingStatus, setLoadingStatus] = useState("loading");
 
-  if (!url || url.length === 0) {
-    throw "useGeneralizedCrudMethods no url passed in error";
+  if (!urls) {
+    throw "Error with urls";
   }
 
   function formatErrorString(e, url) {
@@ -17,7 +17,7 @@ function useGeneralizedCrudMethods(url, errorNotificationFn) {
       e?.response?.status === 404
         ? e?.message + " url " + url
         : e?.message + e?.response?.data;
-    console.log(errorString);
+    console.error(errorString);
     return errorString;
   }
 
@@ -25,7 +25,7 @@ function useGeneralizedCrudMethods(url, errorNotificationFn) {
     async function getData() {
       try {
         setLoadingStatus(LOADING_STATES[0]);
-        const results = await axios.get(url);
+        const results = await axios.get(urls.latest);
         setData(results.data);
         setLoadingStatus(LOADING_STATES[2]);
       } catch (e) {
@@ -34,36 +34,33 @@ function useGeneralizedCrudMethods(url, errorNotificationFn) {
       }
     }
     getData();
-  }, [url]);
+  }, [urls.latest]);
 
   function createRecord(createObject, callbackDone) {
-    // NEED TO HANDLE FAILURE CASE HERE WITH REWIND TO STARTING DATA
-    // AND VERIFY createObject has id
-
+    
     async function addData() {
       const startingData = data.map(function (rec) {
         return { ...rec };
       });
       try {
-        createObject.id = Math.max(...data.map((o) => o.id), 0) + 1;
         setData(function (oriState) {
           return [createObject, ...oriState];
         });
-        await axios.post(`${url}/${createObject.id}`, createObject);
+        await axios.post(`${urls.mutate}`, createObject);
         if (callbackDone) callbackDone();
       } catch (e) {
         setData(startingData);
-        const errorString = formatErrorString(e, url);
+        const errorString = formatErrorString(e, urls.mutate);
         errorNotificationFn?.(errorString);
         if (callbackDone) callbackDone();
       }
     }
     addData();
   }
+
   function updateRecord(updateObject, callbackDone) {
-    const id = updateObject.id; // all speakers must have a column "id"
+    const id = updateObject.id; 
     async function updateData() {
-      //const startingData = [...data]; // FAILS BECAUSE NOT DEEP COPY
       const startingData = data.map(function (rec) {
         return { ...rec };
       });
@@ -79,14 +76,12 @@ function useGeneralizedCrudMethods(url, errorNotificationFn) {
         });
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        // get the full record back that has been updated
         const updatedRecord = data.find((rec) => rec.id === id);
-        await axios.put(`${url}/${id}`, updatedRecord);
-        // console.log(`done  call axios.put`);
+        await axios.put(`${urls.mutate}/${id}`, updatedRecord);
         if (callbackDone) callbackDone();
       } catch (e) {
         setData(startingData);
-        const errorString = formatErrorString(e, url);
+        const errorString = formatErrorString(e, urls.mutate);
         errorNotificationFn?.(errorString);
         if (callbackDone) callbackDone();
       }
@@ -108,11 +103,11 @@ function useGeneralizedCrudMethods(url, errorNotificationFn) {
         setData(function (oriState) {
           return oriState.filter((rec) => rec.id != id);
         });
-        await axios.delete(`${url}/${id}`);
+        await axios.delete(`${urls.mutate}/${id}`);
         if (callbackDone) callbackDone();
       } catch (e) {
         setData(startingData);
-        const errorString = formatErrorString(e, url);
+        const errorString = formatErrorString(e, urls.mutate);
         errorNotificationFn?.(errorString);
         if (callbackDone) callbackDone();
       }
@@ -125,13 +120,29 @@ function useGeneralizedCrudMethods(url, errorNotificationFn) {
     }
   }
 
+  function searchRecord(term) {
+    async function getData(term) {
+      try {
+        setLoadingStatus(LOADING_STATES[0]);
+        const results = await axios.get(`${urls.search}?term=${term}`);
+        setData(results.data);
+        setLoadingStatus(LOADING_STATES[2]);
+      } catch (e) {
+        setError(e);
+        setLoadingStatus(LOADING_STATES[1]);
+      }
+    }
+    getData(term);
+  }
+
   return {
-    data, // returned data after loadingStatus === "success"
-    loadingStatus, // "success", "errored", "loading"
-    error, // error string
-    createRecord, // creates new record at end, takes first record as parameter, second as callback function when done
-    updateRecord, // update new record at end, takes single record as parameter, second as callback function when done
-    deleteRecord, // takes primary key named "id"
+    data,
+    loadingStatus,
+    error,
+    createRecord,
+    updateRecord,
+    deleteRecord,
+    searchRecord,
   };
 }
 

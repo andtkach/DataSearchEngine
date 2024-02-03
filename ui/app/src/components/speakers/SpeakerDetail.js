@@ -5,31 +5,35 @@ import SpeakerImageToggleOnScroll from "./SpeakerImageToggleOnScroll";
 import { SpeakerModalProvider } from "../contexts/SpeakerModalContext";
 import SpeakerModal from "../speakerModal/SpeakerModal";
 
-export default function SpeakerDetail({ speakerRec, showDetails }) {
+export default function SpeakerDetail({ speakerRec, showDetails, searchTerm }) {
   const { setRoute } = {
     setRoute: (route) => {
       window.location.href = route;
     },
   };
+
+  const needhl = (data) => {
+    
+    if (!searchTerm) return false;
+    if (!data) return false;  
+
+    if (data.toLowerCase().includes(searchTerm.toLowerCase()))
+      return true;
+
+    return false;
+  }
+
   return (
     <SpeakerModalProvider>
       {speakerRec && <SpeakerModal />}
       <div className="col-xl-6 col-md-12">
         <div className="card border-0">
           <div className="row g-0">
-            <div className="col-4">
-              <SpeakerImageToggleOnScroll
-                imageUrl={speakerRec?.imageUrl}
-                alt={`${speakerRec?.firstName} ${speakerRec?.lastName}`}
-                thumbNail={false}
-              />
-            </div>
-
-            <div className="col-8 d-flex flex-column flex-nowrap">
+            
+            <div className="col-12 d-flex flex-column flex-nowrap">
               <div className="card-body">
                 <div className="speaker-action d-flex">
-                  <div className="favoriteToggleWrapper">
-                    <FavoriteSpeakerToggle speakerRec={speakerRec} />
+                  <div className="favoriteToggleWrapper">                    
                   </div>
 
                   <div className="modifyWrapper">
@@ -37,7 +41,9 @@ export default function SpeakerDetail({ speakerRec, showDetails }) {
                     <DeleteSpeakerButton id={speakerRec.id} />
                   </div>
                 </div>
-                <h4 className="card-title">
+                <h4 className={needhl(speakerRec.firstName) || needhl(speakerRec.lastName)
+                    ? "mb-1 background-text-highlight card-title"
+                    : "mb-1 card-title"}>
                   <a
                     onClick={() => {
                       setRoute(`/speaker/${speakerRec.id}`);
@@ -48,23 +54,26 @@ export default function SpeakerDetail({ speakerRec, showDetails }) {
                   </a>
                 </h4>
 
-                {showDetails === true ? (
-                  <p className="card-text">{speakerRec.bio}</p>
-                ) : (
-                  <p className="card-text">{speakerRec.userBioShort}</p>
-                )}
+                <p className={needhl(speakerRec.bio)
+                    ? "mb-1 background-text-highlight card-text"
+                    : "mb-1 card-text"}>{speakerRec.bio}</p>
+                
               </div>
 
               <div className="card-footer text-muted d-flex flex-wrap justify-content-between align-items-center">
-                {speakerRec?.company?.length > 0 ? (
-                  <small>
-                    <strong>Company:</strong> {speakerRec.company}
+                {speakerRec?.country?.length > 0 ? (
+                  <small className={needhl(speakerRec.country)
+                    ? "mb-1 background-text-highlight"
+                    : "mb-1"}>
+                    <strong>Country:</strong> {speakerRec.country}
                   </small>
                 ) : null}
 
-                {speakerRec.twitterHandle.length > 0 ? (
-                  <small>
-                    <strong>Twitter</strong>: {speakerRec.twitterHandle}
+                {speakerRec.email.length > 0 ? (
+                  <small className={needhl(speakerRec.email)
+                    ? "mb-1 background-text-highlight"
+                    : "mb-1"}>
+                    <strong>Email</strong>: {speakerRec.email}
                   </small>
                 ) : null}
               </div>

@@ -17,8 +17,8 @@ function Speakers() {
             <div className="row g-4">
               <SpeakersList />
             </div>
-          </div>
-        </SpeakerMenuProvider>
+          </div>          
+        </SpeakerMenuProvider>        
       </SpeakersDataProvider>
     </div>
   );

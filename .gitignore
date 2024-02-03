@@ -398,3 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 docker/DockerDatabases/.containers/
+
+ui/app/.next/

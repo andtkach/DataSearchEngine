@@ -9,7 +9,7 @@ export default function AddSpeakerDialog() {
     setModalSpeakerFirstName,
     setModalSpeakerLastName,
     setModalSpeakerEmail,
-    setModalSpeakerImageUrl,
+    setModalSpeakerCountry,
   } = useContext(SpeakerModalContext);
 
   return (
@@ -21,12 +21,12 @@ export default function AddSpeakerDialog() {
           setModalSpeakerFirstName("");
           setModalSpeakerLastName("");
           setModalSpeakerEmail("");
-          setModalSpeakerImageUrl("/images/Speaker-New.jpg");
+          setModalSpeakerCountry("");
           setModalShow(true);
         }}
         className="btn btn-accent"
       >
-        Add Speaker <i className="fa fa-plus" />
+        Add Person <i className="fa fa-plus" />
       </button>
     </>
   );

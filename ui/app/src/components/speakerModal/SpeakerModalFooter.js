@@ -9,7 +9,8 @@ export default function NotesModalFooter() {
     modalSpeakerFirstName,
     modalSpeakerLastName,
     modalSpeakerEmail,
-    modalSpeakerImageUrl,
+    modalSpeakerCountry,
+    modalSpeakerBio,
   } = useContext(SpeakerModalContext);
 
   const { data, createSpeaker, updateSpeaker } =
@@ -24,8 +25,9 @@ export default function NotesModalFooter() {
               id: modalSpeakerId,
               firstName: modalSpeakerFirstName,
               lastName: modalSpeakerLastName,
-              imageUrl: modalSpeakerImageUrl,
+              country: modalSpeakerCountry,
               email: modalSpeakerEmail,
+              bio: modalSpeakerBio,
             });
             setModalShow(false);
           }}
@@ -53,14 +55,8 @@ export default function NotesModalFooter() {
               firstName: modalSpeakerFirstName,
               lastName: modalSpeakerLastName,
               email: modalSpeakerEmail,
-              imageUrl: modalSpeakerImageUrl,
-              sat: true,
-              sun: true,
-              favorite: false,
-              company: "Code Camp",
-              twitterHandle: "unknown",
-              userBioShort: "Dummy Bio",
-              bio: "Dummy Bio",
+              country: modalSpeakerCountry,
+              bio: modalSpeakerBio,
             });
             setModalShow(false);
           }}

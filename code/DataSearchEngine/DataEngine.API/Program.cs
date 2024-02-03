@@ -8,7 +8,22 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using DataEngine.API.Mapper;
 
+var AllowSpecificOrigins = "AllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowSpecificOrigins,
+        builder =>
+        {
+            builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .WithOrigins("http://localhost:3000", "https://localhost:3000");
+        });
+});
+
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 
@@ -49,7 +64,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.ApplyMigrations();
-
+app.UseCors(AllowSpecificOrigins);
 app.MapPersonEndpoints();
 
 app.Run();

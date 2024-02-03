@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import SpeakerStatistic from "../speakers/SpeakerStatistic";
 
 export default function AppMenu() {
   const { setRoute } = {
@@ -20,17 +21,7 @@ export default function AppMenu() {
               }}
               className="nav-link"
             >
-              Speakers
-            </button>
-          </li>
-          <li className="nav-item">
-            <button
-              onClick={() => {
-                setRoute("/speakerlist");
-              }}
-              className="nav-link"
-            >
-              Speaker List
+              People
             </button>
           </li>
           <li className="nav-item">
@@ -42,6 +33,9 @@ export default function AppMenu() {
             >
               About
             </button>
+          </li>
+          <li className="px-3">
+            <SpeakerStatistic />
           </li>
           <li>
             <input

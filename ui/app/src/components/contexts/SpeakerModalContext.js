@@ -4,14 +4,16 @@ import useSpeakerModal from "../hooks/useSpeakerModal";
 export const SpeakerModalContext = createContext({
   modalShow: false,
   setModalShow: () => {},
-  modalSpeakerId: 0,
+  modalSpeakerId: "",
   setModalSpeakerId: () => {},
   modalSpeakerFirstName: "",
   setModalSpeakerFirstName: () => {},
   modalSpeakerLastName: "",
   setModalSpeakerLastName: () => {},
-  modalSpeakerImageUrl: "",
-  setModalSpeakerImageUrl: () => {},
+  modalSpeakerCountry: "",
+  setModalSpeakerCountry: () => {},
+  modalSpeakerBio: "",
+  setModalSpeakerBio: () => {},
 });
 
 export const SpeakerModalProvider = ({ children }) => {
@@ -26,8 +28,10 @@ export const SpeakerModalProvider = ({ children }) => {
     setModalSpeakerLastName,
     modalSpeakerEmail,
     setModalSpeakerEmail,
-    modalSpeakerImageUrl,
-    setModalSpeakerImageUrl,
+    modalSpeakerCountry,
+    setModalSpeakerCountry,
+    modalSpeakerBio,
+    setModalSpeakerBio,
   } = useSpeakerModal();
 
   const value = {
@@ -41,8 +45,10 @@ export const SpeakerModalProvider = ({ children }) => {
     setModalSpeakerLastName,
     modalSpeakerEmail,
     setModalSpeakerEmail,
-    modalSpeakerImageUrl,
-    setModalSpeakerImageUrl,
+    modalSpeakerCountry,
+    setModalSpeakerCountry,
+    modalSpeakerBio,
+    setModalSpeakerBio,
   };
 
   return (

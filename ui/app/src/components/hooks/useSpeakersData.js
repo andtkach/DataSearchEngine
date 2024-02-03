@@ -1,9 +1,15 @@
 import useGeneralizedCrudMethods from "./useGeneralizedCrudMethods";
 
 function useSpeakersData() {
-  const url = "/api/speakers";
+  
+  const urls = {
+    search: "http://localhost:7498/person/search",
+    latest: "http://localhost:7498/person/all", // "http://localhost:7498/person/latest",
+    mutate: "http://localhost:7298/persons"
+  }
+
   const errorNotificationFn = (error) => {
-    console.log("Error From useSpeakersData", error);
+    console.error("Error From useSpeakersData", error);
   };
 
   const {
@@ -13,7 +19,8 @@ function useSpeakersData() {
     createRecord,
     updateRecord,
     deleteRecord,
-  } = useGeneralizedCrudMethods(url, errorNotificationFn);
+    searchRecord,
+  } = useGeneralizedCrudMethods(urls, errorNotificationFn);
 
   function createSpeaker(speakerRec, callbackDone) {
     createRecord(speakerRec, callbackDone);
@@ -27,6 +34,10 @@ function useSpeakersData() {
     deleteRecord(id, callbackDone);
   }
 
+  function searchSpeaker(term, callbackDone) {
+    searchRecord(term, callbackDone);
+  }
+
   return {
     speakerList: data,
     loadingStatus,
@@ -34,6 +45,7 @@ function useSpeakersData() {
     createSpeaker,
     updateSpeaker,
     deleteSpeaker,
+    searchSpeaker,
   };
 }
 

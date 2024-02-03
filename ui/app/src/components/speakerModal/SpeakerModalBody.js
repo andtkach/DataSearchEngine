@@ -8,11 +8,14 @@ export default function NotesModalBody() {
     setModalSpeakerFirstName,
     modalSpeakerLastName,
     setModalSpeakerLastName,
-    modalSpeakerImageUrl,
-    setModalSpeakerImageUrl,
+    modalSpeakerCountry,
+    setModalSpeakerCountry,
     modalSpeakerEmail,
     setModalSpeakerEmail,
+    modalSpeakerBio,
+    setModalSpeakerBio,
   } = useContext(SpeakerModalContext);
+  
   return (
     <div className="modal-body">
       <div className="notes-box">
@@ -21,7 +24,7 @@ export default function NotesModalBody() {
             <div className="row">
               <div className="col-md-12">
                 <div className="note-title">
-                  <label>Speaker Id:</label>
+                  <label>Person Id:</label>
                   <span>{modalSpeakerId}</span>
                 </div>
               </div>
@@ -69,18 +72,34 @@ export default function NotesModalBody() {
               </div>
               <div className="col-md-12">
                 <div className="note-title">
-                  <label>Speaker Image URL:</label>
+                  <label>Country:</label>
                   <input
-                    value={modalSpeakerImageUrl}
+                    value={modalSpeakerCountry}
                     onChange={(event) => {
-                      setModalSpeakerImageUrl(event.target.value);
+                      setModalSpeakerCountry(event.target.value);
                     }}
                     type="text"
                     className="form-control"
-                    placeholder="https://"
+                    placeholder="Country"
                   />
                 </div>
               </div>
+
+              <div className="col-md-12">
+                <div className="note-title">
+                  <label>Bio:</label>
+                  <input
+                    value={modalSpeakerBio}
+                    onChange={(event) => {
+                      setModalSpeakerBio(event.target.value);
+                    }}
+                    type="text" 
+                    className="form-control"
+                    placeholder="Bio"
+                  />
+                </div>
+              </div>
+
             </div>
           </form>
         </div>
