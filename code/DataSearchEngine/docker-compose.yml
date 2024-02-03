@@ -1,0 +1,74 @@
+version: '3.4'
+
+services:
+  dataengine.api:
+    image: ${DOCKER_REGISTRY-}dataengineapi
+    container_name: dataengine.api
+    build:
+      context: .
+      dockerfile: DataEngine.API/Dockerfile
+    ports:
+      - "7298:7298"
+    networks:
+      - devnet
+
+  searchengine.api:
+    image: ${DOCKER_REGISTRY-}searchengineapi
+    container_name: searchengine.api
+    build:
+      context: .
+      dockerfile: SearchEngine.API/Dockerfile
+    ports:
+      - "7498:7498"
+    networks:
+      - devnet
+
+  database:
+    image: postgres:latest
+    container_name: database
+    environment:
+      - POSTGRES_DB=dataengine
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/dataengine-db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - devnet
+
+  cache:
+    image: redis:latest
+    container_name: cache
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - devnet
+
+  # search:
+  #   image: elasticsearch:8.12.0
+  #   container_name: search
+  #   ports:
+  #     - 9200:9200
+  #     - 9300:9300
+  #   environment:
+  #     - discovery.type=single-node
+  #     - xpack.security.enabled=false
+  #     - xpack.security.enrollment.enabled=false
+  #     - ELASTIC_PASSWORD=password
+  #   networks:
+  #     - devnet
+
+  # kibana:
+  #   image: kibana:8.12.0
+  #   container_name: kibana
+  #   ports:
+  #     - 5601:5601
+  #   networks:
+  #     - devnet
+    
+networks:
+  devnet:
+    driver: bridge
+    name: devnet_network
