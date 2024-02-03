@@ -1,4 +1,6 @@
-﻿namespace SearchEngine.Domain
+﻿using Common;
+
+namespace SearchEngine.Domain
 {
     public class Person: IPerson
     {

@@ -1,0 +1,1 @@
+npx @apideck/postman-to-k6 DMvsMS.postman_collection.json --separate --iterations 1 -o src/DmvsmsTest.js

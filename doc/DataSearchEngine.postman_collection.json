@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "915cf769-52d2-441d-b01a-96a3fec37d25",
+		"name": "DataSearchEngine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12174279"
+	},
+	"item": [
+		{
+			"name": "Data",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7298/persons",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7298",
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7298/persons/ca8bbb74-fbb3-43d4-ae88-41a7b78d4aa2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7298",
+							"path": [
+								"persons",
+								"ca8bbb74-fbb3-43d4-ae88-41a7b78d4aa2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"{{$randomFirstName}}\",\r\n  \"lastName\": \"{{$randomLastName}}\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"country\": \"{{$randomCountry}}\",\r\n  \"dob\": \"2001-01-01\",\r\n  \"bio\": \"{{$randomCatchPhrase}}\",\r\n  \"profileUrl\": \"{{$randomImageUrl}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7298/persons",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7298",
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"71402504-8eb8-4582-b6ac-a29c34aa9c0d\",\r\n    \"firstName\": \"UPDATED Rogers\",\r\n    \"lastName\": \"Fritsch\",\r\n    \"email\": \"Randy.Mayert63@gmail.com\",\r\n    \"country\": \"Reunion\",\r\n    \"dob\": \"2000-01-01\",\r\n    \"bio\": \"Customizable reciprocal hardware\",\r\n    \"profileUrl\": \"http://placeimg.com/640/480\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7298/persons/71402504-8eb8-4582-b6ac-a29c34aa9c0d",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7298",
+							"path": [
+								"persons",
+								"71402504-8eb8-4582-b6ac-a29c34aa9c0d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7298/persons/c21f06f1-ddab-4320-b831-d0b4182039d7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7298",
+							"path": [
+								"persons",
+								"c21f06f1-ddab-4320-b831-d0b4182039d7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7298/persons/count",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7298",
+							"path": [
+								"persons",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " [\r\n {\r\n    \"id\": \"3\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"emailText\": \"email user mail com\",\r\n    \"country\": \"{{$randomCountry}}\",\r\n    \"dob\": \"2000-01-01\",\r\n    \"bio\": \"{{$randomCatchPhrase}}. Android\"\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7498/Person/create",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7498",
+							"path": [
+								"Person",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7498/Person/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7498",
+							"path": [
+								"Person",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7498/Person/get?id=104",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7498",
+							"path": [
+								"Person",
+								"get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "104"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"id\": \"104\",\r\n    \"firstName\": \"UPDATED {{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"emailText\": \"email user gmail com\",\r\n    \"country\": \"{{$randomCountry}}\",\r\n    \"dob\": \"2000-01-01\",\r\n    \"bio\": \"{{$randomCatchPhrase}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7498/Person/update?id=104",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7498",
+							"path": [
+								"Person",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "104"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7498/Person/delete?id=71402504-8eb8-4582-b6ac-a29c34aa9c0d",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7498",
+							"path": [
+								"Person",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "71402504-8eb8-4582-b6ac-a29c34aa9c0d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7498/Person/search?term=com",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7498",
+							"path": [
+								"Person",
+								"search"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7498/Person/count",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7498",
+							"path": [
+								"Person",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Load",
+			"item": [
+				{
+					"name": "LoadRecord",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(`[${pm.info.requestName}] Status code is 200`, function () {\r",
+									"    pm.response.to.have.status(200);    \r",
+									"});\r",
+									"\t\t\t\t\t\t\t\t\t\r",
+									"pm.test(`[${pm.info.requestName}] Log response time`, function() {\r",
+									"      let needLog =\r",
+									"        pm.variables.get(\"logResponseTime\").toLowerCase() === \"true\";\r",
+									"      if (needLog) {\r",
+									"        console.log(\r",
+									"          pm.response.responseTime, `\\t response from [${pm.info.requestName}]`\r",
+									"        );\r",
+									"      }\r",
+									"    }); \r",
+									"\r",
+									"pm.test(`[${pm.info.requestName}] Log failed status`, function() {\r",
+									"      let needLog =\r",
+									"        pm.variables.get(\"logFailedRequest\").toLowerCase() === \"true\";\r",
+									"      if (!needLog) return;\r",
+									"\r",
+									"      const s = pm.response.code;\r",
+									"\r",
+									"      if (s != 200) {\r",
+									"        let logObj = {\r",
+									"          name: pm.info.requestName,\r",
+									"          responseCode: pm.response.code\r",
+									"        };\r",
+									"\r",
+									"        try {\r",
+									"          logObj[\"url\"] = pm.request.url.toString();\r",
+									"        } catch (e) {\r",
+									"          logObj[\"url\"] = response.request.url;\r",
+									"        }\r",
+									"        try {\r",
+									"          logObj[\"requestHeaders\"] = pm.request.getHeaders();\r",
+									"        } catch (e) {\r",
+									"          logObj[\"requestHeaders\"] = response.request.headers;\r",
+									"        }\r",
+									"\r",
+									"        try {\r",
+									"          if (pm.request.body.raw) {\r",
+									"            logObj[\"requestBody\"] = pm.request.body.raw\r",
+									"          }\r",
+									"        } catch (e) {\r",
+									"          if (response.request.body) {\r",
+									"            logObj[\"requestBody\"] = response.request.body;\r",
+									"          }\r",
+									"        }\r",
+									"\r",
+									"        try {\r",
+									"          const resBody = pm.response.body.raw;\r",
+									"          logObj[\"responseBody\"] = resBody;\r",
+									"        } catch (e) {\r",
+									"            logObj[\"responseBody\"] = \"No response body\";\r",
+									"        }\r",
+									"\r",
+									"        console.log(\"Failed status check: \", JSON.stringify(logObj));\r",
+									"      }\r",
+									"    }); \r",
+									"\r",
+									"pm.test(`[${pm.info.requestName}] Get data`, function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"id\", jsonData.id)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"{{$randomFirstName}}\",\r\n  \"lastName\": \"{{$randomLastName}}\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"country\": \"{{$randomCountry}}\",\r\n  \"dob\": \"2001-01-01\",\r\n  \"bio\": \"{{$randomCatchPhrase}}\",\r\n  \"profileUrl\": \"{{$randomImageUrl}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7298/persons",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7298",
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "logResponseTime",
+			"value": "true",
+			"type": "string"
+		},
+		{
+			"key": "logFailedRequest",
+			"value": "true",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}

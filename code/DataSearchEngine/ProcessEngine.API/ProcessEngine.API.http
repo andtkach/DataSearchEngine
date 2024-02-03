@@ -1,0 +1,6 @@
+@ProcessEngine.API_HostAddress = http://localhost:5145
+
+GET {{ProcessEngine.API_HostAddress}}/info/
+Accept: application/json
+
+###

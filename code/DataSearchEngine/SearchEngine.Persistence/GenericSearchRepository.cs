@@ -1,14 +1,15 @@
-﻿using SearchEngine.Domain;
+﻿using Common;
+using SearchEngine.Domain;
 using SearchEngine.Application.Interfaces;
 using Nest;
 
 namespace SearchEngine.Persistence
 {
-    public class GenericSearchRepo<T> : IGenericRepo<T> where T : class, IPerson
+    public class GenericSearchRepository<T> : IGenericSearchRepository<T> where T : class, IPerson
     {
         private readonly IElasticClient _client;
 
-        public GenericSearchRepo(IElasticClient client)
+        public GenericSearchRepository(IElasticClient client)
         {
             this._client = client;
         }
@@ -64,6 +65,15 @@ namespace SearchEngine.Persistence
 
             if (!response.IsValid) return new List<T>();
             return response.Documents.ToList();
+        }
+
+        public async Task<int> Count()
+        {
+            var indexName = typeof(T).Name.ToLower();
+            var result = await _client.CountAsync<T>(s => 
+                s.Index(indexName)
+                    .Query(q => q.MatchAll()));
+            return (int)result.Count;
         }
 
         public async Task<T> Get(string id)

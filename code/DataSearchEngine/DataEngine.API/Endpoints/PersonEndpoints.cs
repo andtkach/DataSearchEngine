@@ -1,8 +1,12 @@
-﻿using DataEngine.API.Contracts;
+﻿using System.Threading.Channels;
+using AutoMapper;
+using Common;
+using DataEngine.API.Contracts;
 using DataEngine.API.Database;
 using DataEngine.API.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using static StackExchange.Redis.Role;
 
 namespace DataEngine.API.Endpoints;
 
@@ -13,23 +17,15 @@ public static class PersonEndpoints
         app.MapPost("persons", async (
             CreatePersonRequest request,
             ApplicationDbContext context,
+            Channel<StorePersonCreate> channel,
+            IMapper mapper,
             CancellationToken ct) =>
         {
-            var item = new Person
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Email = request.Email,
-                Country = request.Country,
-                Dob = request.Dob,
-                Bio = request.Bio,
-                ProfileUrl = request.ProfileUrl
-            };
-
+            var item = mapper.Map<Person>(request);
             context.Add(item);
-
             await context.SaveChangesAsync(ct);
-
+            var storePerson = mapper.Map<StorePersonCreate>(item);
+            await channel.Writer.WriteAsync(storePerson, ct);
             return Results.Ok(item);
         });
 
@@ -74,6 +70,8 @@ public static class PersonEndpoints
             UpdatePersonRequest request,
             ApplicationDbContext context,
             IDistributedCache cache,
+            Channel<StorePersonUpdate> channel,
+            IMapper mapper,
             CancellationToken ct) =>
         {
             if (id != request.Id)
@@ -100,7 +98,8 @@ public static class PersonEndpoints
             await context.SaveChangesAsync(ct);
 
             await cache.RemoveAsync($"persons-{id}", ct);
-
+            var storePerson = mapper.Map<StorePersonUpdate>(item);
+            await channel.Writer.WriteAsync(storePerson, ct);
             return Results.NoContent();
         });
 
@@ -108,6 +107,8 @@ public static class PersonEndpoints
             Guid id,
             ApplicationDbContext context,
             IDistributedCache cache,
+            Channel<StorePersonDelete> channel,
+            IMapper mapper,
             CancellationToken ct) =>
         {
             var item = await context.Persons
@@ -123,8 +124,16 @@ public static class PersonEndpoints
             await context.SaveChangesAsync(ct);
 
             await cache.RemoveAsync($"persons-{id}", ct);
-
+            var storePerson = mapper.Map<StorePersonDelete>(item);
+            await channel.Writer.WriteAsync(storePerson, ct);
             return Results.NoContent();
+        });
+
+        app.MapGet("persons/count", async (
+            ApplicationDbContext context,
+            CancellationToken ct) =>
+        {
+            return Results.Ok(await context.Persons.CountAsync());
         });
     }
 }

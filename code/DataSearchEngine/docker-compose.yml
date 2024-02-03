@@ -46,6 +46,19 @@ services:
     networks:
       - devnet
 
+  message:
+    image: rabbitmq:management
+    container_name: message
+    hostname: message
+    volumes:
+      - ./.containers/queue/data/:/var/lib/rabbitmq
+      - ./.containers/queue/log/:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - devnet
+
   # search:
   #   image: elasticsearch:8.12.0
   #   container_name: search

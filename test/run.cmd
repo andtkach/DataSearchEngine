@@ -1,0 +1,1 @@
+k6 run src/DmvsmsTest.js

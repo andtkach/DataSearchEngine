@@ -22,7 +22,7 @@ namespace SearchEngine.Persistence
                 //.DefaultIndex("product");
 
             services.AddSingleton<IElasticClient>(new ElasticClient(settings));
-            services.AddScoped(typeof(IGenericRepo<>), typeof(GenericSearchRepo<>));
+            services.AddScoped(typeof(IGenericSearchRepository<>), typeof(GenericSearchRepository<>));
         }
     }
 }
