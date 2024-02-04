@@ -1,13 +1,12 @@
 Task:
 
 Data Catalog with employee records
-- Create, Update and Delete data
+- Create, Update, and Delete data
 - Read individual record details
 - Search over all catalog
 - Frontend to work with data catalog
 
-Estimated data catalog size is about 1 mln records
-
+The estimated data catalog size is about 1 mln records
 
 Data record structure
 - First name

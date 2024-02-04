@@ -4,7 +4,6 @@ import SpeakersList from "./SpeakersList";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { SpeakersDataProvider } from "../contexts/SpeakersDataContext";
 import { SpeakerMenuProvider } from "../contexts/SpeakerMenuContext";
-import SpeakerStatistic from "./SpeakerStatistic";
 
 function Speakers() {
   const { darkTheme } = useContext(ThemeContext);
