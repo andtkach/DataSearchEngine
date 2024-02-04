@@ -3,6 +3,7 @@ import SpeakerDetail from "./SpeakerDetail";
 import { SpeakersDataContext } from "../contexts/SpeakersDataContext";
 import useSpeakerSortAndFilter from "../hooks/useSpeakerSortAndFilter";
 import { SpeakerMenuContext } from "../contexts/SpeakerMenuContext";
+import SpeakerStatistic from "./SpeakerStatistic";
 
 export default function SpeakersList() {
   const { speakerList, loadingStatus, searchSpeaker } = useContext(SpeakersDataContext);
@@ -32,7 +33,7 @@ export default function SpeakersList() {
     return <div className="card">Loading...</div>;
   }
   return (
-    <>
+    <>      
       {speakerListFiltered && speakerListFiltered.map(function (speakerRec) {
         return (
           <SpeakerDetail

@@ -2,7 +2,7 @@ postman[Symbol.for("define")]({
   name: "LoadRecord",
   id: "477fc005-811e-4c84-a50f-19f3555a4ac8",
   method: "POST",
-  address: "https://localhost:7298/persons",
+  address: "http://localhost:7298/persons",
   data:
     '{\r\n  "firstName": "{{$randomFirstName}}",\r\n  "lastName": "{{$randomLastName}}",\r\n  "email": "{{$randomEmail}}",\r\n  "country": "{{$randomCountry}}",\r\n  "dob": "2001-01-01",\r\n  "bio": "{{$randomCatchPhrase}}",\r\n  "profileUrl": "{{$randomImageUrl}}"\r\n}',
   headers: {

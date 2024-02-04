@@ -34,9 +34,7 @@ export default function AppMenu() {
               About
             </button>
           </li>
-          <li className="px-3">
-            <SpeakerStatistic />
-          </li>
+                    
           <li>
             <input
               type="checkbox"

@@ -88,15 +88,14 @@ export default function NotesModalBody() {
               <div className="col-md-12">
                 <div className="note-title">
                   <label>Bio:</label>
-                  <input
+                  <textarea
                     value={modalSpeakerBio}
                     onChange={(event) => {
                       setModalSpeakerBio(event.target.value);
                     }}
-                    type="text" 
                     className="form-control"
-                    placeholder="Bio"
-                  />
+                    rows={4}
+                    placeholder="Bio"></textarea>                  
                 </div>
               </div>
 

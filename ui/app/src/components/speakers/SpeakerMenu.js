@@ -2,6 +2,7 @@ import { useContext } from "react";
 import AddSpeakerDialog from "./AddSpeakerDialog";
 import { SpeakerMenuContext } from "../contexts/SpeakerMenuContext";
 import { SpeakerModalProvider } from "../contexts/SpeakerModalContext";
+import SpeakerStatistic from "./SpeakerStatistic";
 
 export default function SpeakerMenu() {
   const {
@@ -34,6 +35,9 @@ export default function SpeakerMenu() {
           </SpeakerModalProvider>
         </div>
         
+        <div>          
+          <SpeakerStatistic />
+        </div>
       </div>
     </div>
   );

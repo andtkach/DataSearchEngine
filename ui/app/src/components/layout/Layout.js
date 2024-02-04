@@ -5,7 +5,7 @@ import Speaker from "../speakers/Speaker";
 import { ThemeProvider } from "../contexts/ThemeContext";
 
 export default function Layout({ url }) {
-  const speakerId = parseInt(url.substring(9).replace("#", ""));
+  const speakerId = url.substring(url.lastIndexOf('/' ) + 1);
 
   return (
     <ThemeProvider>

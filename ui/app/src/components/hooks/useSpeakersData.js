@@ -5,7 +5,8 @@ function useSpeakersData() {
   const urls = {
     search: "http://localhost:7498/person/search",
     latest: "http://localhost:7498/person/all", // "http://localhost:7498/person/latest",
-    mutate: "http://localhost:7298/persons"
+    mutate: "http://localhost:7298/persons",
+    total: "http://localhost:7498/person/count",
   }
 
   const errorNotificationFn = (error) => {
@@ -20,6 +21,7 @@ function useSpeakersData() {
     updateRecord,
     deleteRecord,
     searchRecord,
+    total,
   } = useGeneralizedCrudMethods(urls, errorNotificationFn);
 
   function createSpeaker(speakerRec, callbackDone) {
@@ -46,6 +48,7 @@ function useSpeakersData() {
     updateSpeaker,
     deleteSpeaker,
     searchSpeaker,
+    total,
   };
 }
 

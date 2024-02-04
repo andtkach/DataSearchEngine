@@ -10,6 +10,7 @@ export default function AddSpeakerDialog() {
     setModalSpeakerLastName,
     setModalSpeakerEmail,
     setModalSpeakerCountry,
+    setModalSpeakerBio,
   } = useContext(SpeakerModalContext);
 
   return (
@@ -22,6 +23,7 @@ export default function AddSpeakerDialog() {
           setModalSpeakerLastName("");
           setModalSpeakerEmail("");
           setModalSpeakerCountry("");
+          setModalSpeakerBio("");
           setModalShow(true);
         }}
         className="btn btn-accent"

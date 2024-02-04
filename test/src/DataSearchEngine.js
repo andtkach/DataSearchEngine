@@ -17,11 +17,11 @@ import "./requests/Search/Search.js";
 import "./requests/Search/Count.js";
 import "./requests/Load/LoadRecord.js";
 
-const N = 10000;
+const N = 100000;
 
 export let options = { 
   maxRedirects: 4, 
-  vus: 10,
+  vus: 5,
   iterations: N, 
 };
 

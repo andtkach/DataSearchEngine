@@ -7,6 +7,7 @@ export default function EditSpeakerDialog({
   lastName,
   email,
   country,
+  bio,
 }) {
   const {
     setModalShow,
@@ -21,6 +22,8 @@ export default function EditSpeakerDialog({
     setModalSpeakerEmail,
     modalSpeakerCountry,
     setModalSpeakerCountry,
+    modalSpeakerBio,
+    setModalSpeakerBio,
   } = useContext(SpeakerModalContext);
 
   return (
@@ -32,6 +35,7 @@ export default function EditSpeakerDialog({
         setModalSpeakerLastName(lastName);
         setModalSpeakerCountry(country);
         setModalSpeakerEmail(email);
+        setModalSpeakerBio(bio);
         setModalShow(true);
       }}
       className="btn btn-accent btn-sm"

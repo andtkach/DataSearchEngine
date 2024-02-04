@@ -8,6 +8,7 @@ export const SpeakersDataContext = createContext({
   deleteSpeaker: () => {},
   searchSpeaker: () => {},
   loadingStatus: "",
+  total: 0,
 });
 
 export const SpeakersDataProvider = ({ children }) => {
@@ -18,6 +19,7 @@ export const SpeakersDataProvider = ({ children }) => {
     deleteSpeaker,
     loadingStatus,
     searchSpeaker,
+    total,
   } = useSpeakersData();
 
   const value = {
@@ -27,6 +29,7 @@ export const SpeakersDataProvider = ({ children }) => {
     deleteSpeaker,
     loadingStatus,
     searchSpeaker,
+    total,
   };
 
   return (

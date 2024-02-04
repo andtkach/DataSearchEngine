@@ -1,9 +1,13 @@
+import React, { useContext } from "react";
+import { SpeakersDataContext } from "../contexts/SpeakersDataContext";
+
 export default function SpeakerStatistic() {
+
+  const { total } = useContext(SpeakersDataContext);
+  
   return (
-    <div>
-      <div className="text-white">
-          <h5>DB-{1000} S-{1000}</h5>
-      </div>
+    <div>    
+          <h5>DB-{total}</h5>          
     </div>
   );
 }

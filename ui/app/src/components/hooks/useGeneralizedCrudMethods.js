@@ -5,6 +5,7 @@ const LOADING_STATES = ["loading", "errored", "success"];
 
 function useGeneralizedCrudMethods(urls, errorNotificationFn) {
   const [data, setData] = useState();
+  const [total, setTotal] = useState(0);
   const [error, setError] = useState();
   const [loadingStatus, setLoadingStatus] = useState("loading");
 
@@ -35,6 +36,21 @@ function useGeneralizedCrudMethods(urls, errorNotificationFn) {
     }
     getData();
   }, [urls.latest]);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        setLoadingStatus(LOADING_STATES[0]);
+        const results = await axios.get(urls.total);
+        setTotal(results.data);
+        setLoadingStatus(LOADING_STATES[2]);
+      } catch (e) {
+        setError(e);
+        setLoadingStatus(LOADING_STATES[1]);
+      }
+    }
+    getData();
+  }, [urls.total]);
 
   function createRecord(createObject, callbackDone) {
     
@@ -135,10 +151,11 @@ function useGeneralizedCrudMethods(urls, errorNotificationFn) {
     getData(term);
   }
 
-  return {
+  return {    
     data,
     loadingStatus,
     error,
+    total,
     createRecord,
     updateRecord,
     deleteRecord,

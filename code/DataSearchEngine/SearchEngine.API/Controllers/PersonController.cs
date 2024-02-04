@@ -13,11 +13,13 @@ namespace SearchEngine.API.Controllers
     {
         private readonly IGenericSearchRepository<Person> _repository;
         private readonly IDistributedCache _cache;
+        private readonly ILogger<PersonController> _logger;
 
-        public PersonController(IGenericSearchRepository<Person> repository, IDistributedCache cache)
+        public PersonController(IGenericSearchRepository<Person> repository, IDistributedCache cache, ILogger<PersonController> logger)
         {
             _repository = repository;
             _cache = cache;
+            _logger = logger;
         }
 
         [HttpPost("create")]
@@ -53,22 +55,18 @@ namespace SearchEngine.API.Controllers
         [HttpGet("search")]
         public async Task<IEnumerable<Person>> Search(string term)
         {
-            //var result = await _repository.Search(term);
-
-            var result = new List<Person>();
             var cached = await _cache.GetStringAsync($"search-{term}");
             if (!string.IsNullOrEmpty(cached))
             {
-                result = JsonSerializer.Deserialize<List<Person>>(cached);
-            }
-            else
-            {
-                var data = await _repository.Search(term);
-                await _cache.SetStringAsync($"search-{term}", JsonSerializer.Serialize(data), CacheOptions.DefaultExpiration);
-                result = data.ToList();
+                _logger.LogInformation("Get search result from cache for term: {term}", term);
+                return JsonSerializer.Deserialize<List<Person>>(cached) ?? []; 
             }
 
-            return result ?? [];
+            _logger.LogInformation("Get search result from server and populate cache for term: {term}", term);
+            var result = (await _repository.Search(term)).ToList();
+            await _cache.SetStringAsync($"search-{term}", JsonSerializer.Serialize(result), CacheOptions.DefaultExpiration);
+
+            return result;
         }
 
         [HttpGet("all")]

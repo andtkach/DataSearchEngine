@@ -4,6 +4,7 @@ import SpeakersList from "./SpeakersList";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { SpeakersDataProvider } from "../contexts/SpeakersDataContext";
 import { SpeakerMenuProvider } from "../contexts/SpeakerMenuContext";
+import SpeakerStatistic from "./SpeakerStatistic";
 
 function Speakers() {
   const { darkTheme } = useContext(ThemeContext);
@@ -12,11 +13,11 @@ function Speakers() {
     <div className={darkTheme ? "theme-dark" : "theme-light"}>
       <SpeakersDataProvider>
         <SpeakerMenuProvider>
-          <SpeakerMenu />
-          <div className="container">
+          <SpeakerMenu />          
+          <div className="container">            
             <div className="row g-4">
               <SpeakersList />
-            </div>
+            </div>            
           </div>          
         </SpeakerMenuProvider>        
       </SpeakersDataProvider>
